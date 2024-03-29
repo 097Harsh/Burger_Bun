@@ -1,0 +1,195 @@
+
+            <input id="tab1" type="radio" name="tabs" checked>
+            <label class="tabtle" for="tab1">Burgers</label>
+
+            <input id="tab2" type="radio" name="tabs">
+            <label class="tabtle" for="tab2">Hot Snacks</label>
+
+            <input id="tab3" type="radio" name="tabs">
+            <label class="tabtle" for="tab3">Beverages</label>
+
+            <section id="content1" class="tab-content text-left">
+ </section>
+
+            <section id="content2" class="tab-content text-left">
+                <!-- <h3 class="title-small text-center">Hot Beverages - <span>Coffee and Cappuccino</span></h3> -->
+                <div class="row menu-body">
+                    <!-- Section starts: Drinks -->
+                    <div class="col-lg-6 menu-section pl-lg-5 order-lg-2">
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Corn Tikki - Spicy fried Aloo</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$20</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Spicy, Shallow Fried Aloo Tikki with Sweet Corn</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Bread besan Toast</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$50</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Lorem ipsum dolor sit amet, elit efficitur.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Healthy soya nugget snacks</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$23</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Lorem ipsum dolor sit amet, elit efficitur.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Tandoori Soya Chunks</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$50</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Tandoori Soya Chunks in this oven-baked recipe</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                    </div>
+                    <!-- Section ends: Drinks -->
+                    <!-- Section starts: Drinks -->
+                    <div class="col-lg-6 menu-section text-center pr-lg-5 order-lg-1">
+                        <img src="assets/images/snacks.png" alt="" class="radius-image img-fluid">
+                    </div>
+                    <!-- Section ends: Drinks -->
+                </div>
+            </section>
+
+            <section id="content3" class="tab-content text-left">
+                <!-- <h3 class="title-small text-center">Cold Beverages - <span>Coffee and Cappuccino</span></h3> -->
+                <div class="row menu-body">
+                    <!-- Section starts: Appetizers -->
+                    <div class="col-lg-6 menu-section pr-lg-5">
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Single Cup Brew </h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$19.50</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Fresh Brewed coffee and steamed milk</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Caffé Americano</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$13.75</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Fresh Brewed coffee and steamed milk</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Caramel Macchiato</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$10.50</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Fresh Brewed coffee and steamed milk</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Standard black coffee</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$8.25</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Fresh Brewed coffee and steamed milk</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                        <!-- Item starts -->
+                        <div class="menu-item">
+                            <div>
+                                <div class="row border-dot no-gutters">
+                                    <div class="col-8 menu-item-name">
+                                        <h6>Standard black coffee</h6>
+                                    </div>
+                                    <div class="col-4 menu-item-price text-right">
+                                        <h6>$8.25</h6>
+                                    </div>
+                                </div>
+                                <div class="menu-item-description">
+                                    <p>Fresh Brewed coffee and steamed milk</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item ends -->
+                    </div>
+                    <!-- Section ends: Appetizers -->
+
+                    <!-- Section starts: Appetizers -->
+                    <div class="col-lg-6 menu-section pl-lg-5 text-center">
+                        <img src="assets/images/beverages.png" alt="" class="radius-image img-fluid">
+                    </div>
+                    <!-- Section ends: Appetizers -->
+            </section>
