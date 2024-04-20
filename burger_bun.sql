@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2024 at 12:17 PM
+-- Generation Time: Apr 20, 2024 at 02:32 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,6 +42,32 @@ CREATE TABLE `area` (
 INSERT INTO `area` (`area_id`, `area_name`, `city_id`, `created_at`, `updated_at`) VALUES
 (1, 'Bapunagar', 1, '2024-02-08 10:55:09', '2024-02-08 10:55:09'),
 (2, 'Nikol', 1, '2024-02-08 10:55:09', '2024-02-08 10:55:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_table`
+--
+
+CREATE TABLE `book_table` (
+  `b_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `b_date` date NOT NULL,
+  `starting_time` varchar(255) NOT NULL,
+  `ending_time` varchar(255) NOT NULL,
+  `booking_name` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `book_table`
+--
+
+INSERT INTO `book_table` (`b_id`, `user_id`, `b_date`, `starting_time`, `ending_time`, `booking_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 5, '2024-04-20', '17:30', '18:30', 'harsh', 'Cancelled by the user', '2024-04-20 06:29:53', '2024-04-20 06:47:47'),
+(2, 2, '2024-04-27', '20:00', '21:00', 'Het Shah', 'Pending', '2024-04-20 06:32:38', '2024-04-20 07:00:31');
 
 -- --------------------------------------------------------
 
@@ -118,34 +144,6 @@ INSERT INTO `contact` (`id`, `name`, `email`, `contact_no`, `subject`, `msg`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `event`
---
-
-CREATE TABLE `event` (
-  `e_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `e_date` date NOT NULL,
-  `e_type` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `event`
---
-
-INSERT INTO `event` (`e_id`, `user_id`, `e_date`, `e_type`, `status`, `created_at`, `updated_at`, `title`) VALUES
-(1, 5, '2024-04-02', 'Birthday-Celebration', 'Pending', '2024-02-26 02:03:51', '2024-02-26 07:38:31', 'birthday-celevration'),
-(2, 2, '2024-07-02', 'Birthday-Celebration', 'Pending', '2024-02-26 07:42:34', '2024-02-26 07:59:16', 'birthday-celevration'),
-(3, 2, '2024-07-02', 'Birthday-Celebration', 'Rejected', '2024-02-26 07:43:16', '2024-02-26 07:44:23', 'birthday-celevration'),
-(4, 4, '2024-04-02', 'Birthday-Celebration', 'Pending', '2024-03-13 10:01:48', '2024-03-13 10:01:48', 'My Birth-day party celebration'),
-(5, 3, '2024-04-02', 'Birthday-Celebration', 'Pending', '2024-03-28 01:33:36', '2024-03-28 01:33:36', 'birthday');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `failed_jobs`
 --
 
@@ -216,9 +214,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (39, '2024_02_06_112218_create_roles_table', 1),
 (40, '2024_02_08_110420_create_product_table', 2),
 (41, '2024_02_17_160728_add_gender_to_users_table', 3),
-(42, '2024_02_26_072524_create_event_table', 4),
 (43, '2024_03_13_152708_add_title_to_event_table', 5),
-(46, '2024_03_24_070934_create_order_table', 6);
+(46, '2024_03_24_070934_create_order_table', 6),
+(47, '2024_02_26_072524_create_event_table', 7);
 
 -- --------------------------------------------------------
 
@@ -428,6 +426,13 @@ ALTER TABLE `area`
   ADD KEY `area_city_id_foreign` (`city_id`);
 
 --
+-- Indexes for table `book_table`
+--
+ALTER TABLE `book_table`
+  ADD PRIMARY KEY (`b_id`),
+  ADD KEY `book_table_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
@@ -445,13 +450,6 @@ ALTER TABLE `city`
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event`
---
-ALTER TABLE `event`
-  ADD PRIMARY KEY (`e_id`),
-  ADD KEY `event_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -542,6 +540,12 @@ ALTER TABLE `area`
   MODIFY `area_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `book_table`
+--
+ALTER TABLE `book_table`
+  MODIFY `b_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
@@ -560,12 +564,6 @@ ALTER TABLE `contact`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `event`
---
-ALTER TABLE `event`
-  MODIFY `e_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -581,7 +579,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -636,16 +634,16 @@ ALTER TABLE `area`
   ADD CONSTRAINT `area_city_id_foreign` FOREIGN KEY (`city_id`) REFERENCES `city` (`city_id`) ON DELETE SET NULL;
 
 --
+-- Constraints for table `book_table`
+--
+ALTER TABLE `book_table`
+  ADD CONSTRAINT `book_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
+
+--
 -- Constraints for table `city`
 --
 ALTER TABLE `city`
   ADD CONSTRAINT `city_state_id_foreign` FOREIGN KEY (`state_id`) REFERENCES `state` (`state_id`) ON DELETE SET NULL;
-
---
--- Constraints for table `event`
---
-ALTER TABLE `event`
-  ADD CONSTRAINT `event_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `feedback`

@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event', function (Blueprint $table) {
-            $table->id('e_id');
+        Schema::create('book_table', function (Blueprint $table) {
+            $table->id('b_id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->date('e_date');
-            $table->string('e_type');
+            $table->date('b_date');
+            $table->string('starting_time');
+            $table->string('ending_time');
+            $table->string('booking_name');
             $table->string('status');
             $table->timestamps();
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('set null');

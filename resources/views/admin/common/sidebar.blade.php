@@ -50,23 +50,23 @@
                 </a>
               </li>
               <li class="treeview">
-                <a href="{{route('All_events')}}">
+                <a href="{{route('All_bookings')}}">
                 <i class="fa fa-calendar"></i>
-                <span>Manage Events</span>
+                <span>Manage Table-Bookings</span>
                 
                 </a>
               </li>
-              <li class="treeview">
+             <!-- <li class="treeview">
                 <a href="{{route('all_contact')}}">
                 <i class="fa fa-book"></i>
                 <span>Manage Contacts</span>
                 
                 </a>
-              </li>
+              </li> -->
               <li class="treeview">
                 <a href="{{route('all_feedback')}}">
                 <i class="fa fa-comments-o"></i>
-                <span>Manage Feed-Back</span>
+                <span>View Feed-Back</span>
                 
                 </a>
               </li>

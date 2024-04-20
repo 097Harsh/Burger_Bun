@@ -10,7 +10,7 @@ $userId = session('user_id');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Schedule Event</title>
+    <title>Book Table</title>
 
     <link href="//fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,9 +40,9 @@ $userId = session('user_id');
                         <img src="user/assets/images/event.png" style="height: 300px; width: 410px; align:center;">
                     </div>
                     <div class="col-lg-8">
-                        <h3 class="title-big">Schedule an Event with us...</h3>
+                        <h3 class="title-big">Book-table for dinnig order</h3>
                         <p class="mb-4 mt-lg-0 mt-2">Please fill the mentioned details...</p>
-                        <form action="{{url('/store_Event/'.$userId)}}" method="post" class="text-right">
+                        <form action="{{url('/store_booking/'.$userId)}}" method="post" class="text-right">
                         @csrf   
                         <!-- <div class="form-grid">
                                 <input type="text" name="w3lName" id="w3lName" placeholder="Name*" required="">
@@ -51,18 +51,16 @@ $userId = session('user_id');
                                     required="">
                                 <input type="text" name="w3lSubject" id="w3lSubject" placeholder="Subject">
                             </div>-->
-                            <input type="text" name="name" id="name" placeholder="Event Title" required="">
+                            <input type="text" name="name" id="name" placeholder="Table Booking Name" required="">
                            
-                            <label for="date" style="float:left;">Pick date for event</label>
+                            <label for="date" style="float:left;">Pick date for table booking</label>
                             <input type="date" name="date" id="date" placeholder="Pick a date" required=""><br><br>
-                            <label for="e_type" style="float:left;">Choose which type you celebrate</label>
-                            <br>
-                                <select class="form-control"  id="e_type" name="e_type">
-                                <option value="">--Select Event type--</option>
-                                <option value="Birthday-Celebration">Birthday-Celebration</option>
-                                <option value="Anniversary-Celebration">Anniversary-Celebration</option>
-                                <option value="Other-Celebration">Other-Celebration</option>
-                                </select>
+                            
+                            <label for="s_time" style="float:left;">Starting time</label>
+                            <input type="time" id="s_time" name="s_time"><br>
+                            <label for="s_time" style="float:left;">Ending time</label>
+                            <input type="time" id="e_time" name="e_time">
+                            
                             
                             <button type="submit" name="submit" id="submit" class="btn btn-primary btn-style mt-3">Submit</button>
                             

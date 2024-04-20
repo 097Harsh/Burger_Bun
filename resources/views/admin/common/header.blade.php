@@ -173,7 +173,6 @@
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
 								<li> <a href="{{route('logout')}}"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							</ul>
 						</li>

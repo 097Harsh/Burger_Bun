@@ -4,6 +4,7 @@
     //echo $price;
     $userId = session('user_id');
     $total_price = $price * 100;
+
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +34,8 @@
             "description": "Acme Corp",
             "image": "https://s3.amazonaws.com/rzp-mobile/images/rzp.jpg",
             "prefill": {
-                "email": "harshshah6966@gmail.com",
-                "contact": "+919712658293"
+                "email": "{{$user->email}}",
+                "contact": "{{$user->Contact}}"
             },
             "config": {
                 "display": {

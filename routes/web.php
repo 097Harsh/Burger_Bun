@@ -59,7 +59,7 @@ Route::get('/delete_product/{p_id}', [AdminAuthController::class, 'DeleteProduct
 Route::get('/updateproduct/{p_id}', [AdminAuthController::class, 'EditProduct'])->name('updateproduct')->middleware('is_admin');
 Route::match(['get', 'post'], '/edit_product/{p_id}', [AdminAuthController::class, 'Store_Product'])->name('edit_product')->middleware('is_admin');
 //Manage Event's URL's
-Route::get('/All_events', [AdminAuthController::class, 'ShowEvents'])->name('All_events')->middleware('is_admin');
+Route::get('/All_bookings', [AdminAuthController::class, 'ShowEvents'])->name('All_bookings')->middleware('is_admin');
 //accept event requet
 Route::get('/accept_event/{e_id}', [AdminAuthController::class, 'AcceptEvent'])->name('accept_event')->middleware('is_admin');
 //reject event request
@@ -87,10 +87,10 @@ Route::post('/store_Feedback/{user_id}', [UserController::class, 'storeFeedback'
 //menu page
 Route::get('/menu', [UserController::class, 'ShowMenu'])->name('menu')->middleware('is_admin');
 //event's page
-Route::get('/events/{user_id}', [UserController::class, 'ShowEvents'])->name('events')->middleware('is_admin');
+Route::get('/table-booking/{user_id}', [UserController::class, 'ShowEvents'])->name('events')->middleware('is_admin');
 //to make event with us
-Route::get('/add_event', [UserController::class, 'AddEvent'])->name('add_event')->middleware('is_admin');
-Route::post('/store_Event/{user_id}', [UserController::class, 'Store_event'])->name('store_Event')->middleware('is_admin');
+Route::get('/book_table', [UserController::class, 'AddEvent'])->name('add_event')->middleware('is_admin');
+Route::post('/store_booking/{user_id}', [UserController::class, 'Store_event'])->name('store_Event')->middleware('is_admin');
 //cancle the event request
 Route::get('/cancle/{e_id}', [UserController::class, 'CancelEvents'])->name('cancle')->middleware('is_admin');
 //Use-Profile page 

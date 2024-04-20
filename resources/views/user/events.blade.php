@@ -18,7 +18,7 @@ $userId = session('user_id');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>All Event</title>
+    <title>All table-booking</title>
 
     <link href="//fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 
@@ -49,35 +49,29 @@ $userId = session('user_id');
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Event ID</th>
-                                        <th>Event Title</th>
-                                        <th>User Name</th>
-                                        <th> contact</th>
-                                        <th>Event Type</th>
-                                        <th>Event Date</th>
-                                        <th>Event Status</th>
+                                        <th>Booking ID</th>
+                                        <th>Booking Name</th>
+                                        <th>Booking Date</th>
+                                        <th>Booking Starting-time </th>
+                                        <th>Booking Ending-time</th>
+                                        <th>Booking Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($events as $event)
                                     <tr>
-                                        <td>{{$event->e_id}}</td>
-                                        <td>{{$event->title}}</td>
-                                        <td>{{$event->name}}</td>
-                                        <td>{{$event->contact}}</td>
-                                        <td>{{$event->e_type}}</td>
-                                        <td>{{$event->e_date}}</td>
-                                        <td>{{$event->status}}</td>
-                                        @if($event->status == 'Rejected')
-                                        <td>Admin Reject Your Request</td>
-                                        @elseif($event->status == 'Cancled by the user')
-                                        <td>Cancled by the user</td>
-                                        @else
+                                        <td>{{$event->b_id}}</td>
+                                        <td>{{$event->booking_name}}</td>
+                                        <td>{{$event->b_date}}</td>
+                                        <td>{{$event->starting_time}}</td>
+                                        <td>{{$event->ending_time}}</td>
+                                        <td> {{$event->status}} </td>
+                                      @if($event->status == 'Pending')
                                         <td>
-                                          <a href="{{ route('cancle', ['e_id' => $event->e_id]) }}"><button class="btn btn-danger">Cancle</button></a>
+                                          <a href="{{ route('cancle', ['e_id' => $event->b_id]) }}"><button class="btn btn-danger">Cancle</button></a>
                                         </td>
-                                        @endif
+                                       @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

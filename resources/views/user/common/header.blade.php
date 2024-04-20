@@ -23,9 +23,7 @@
                   <li class="nav-item @@about__active">
                       <a class="nav-link" href="{{route('about')}}">About</a>
                   </li>
-                  <li class="nav-item @@contact__active">
-                      <a class="nav-link" href="{{route('contact')}}">Contact</a>
-                  </li>
+                
                     @php
                         $userId = session('user_id');
                         //echo "User ID: $userId";
@@ -50,7 +48,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="{{url('/profile/'.$userId)}}">My Profile</a>
                                     <a class="dropdown-item" href="{{url('/myorder/'.$userId)}}">My Orders</a>
-                                    <a class="dropdown-item" href="{{url('/events/'.$userId)}}">My Events</a>
+                                    <a class="dropdown-item" href="{{url('/table-booking/'.$userId)}}">My Bookings</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
                                 </div>  
                             </div>

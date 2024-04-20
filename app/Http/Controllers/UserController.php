@@ -102,9 +102,9 @@ class UserController extends Controller
     }
 
     public function ShowEvents($id){
-        $events = Eventmodel::join('users', 'event.user_id', '=', 'users.user_id')
-                        ->where('event.user_id', $id)
-                        ->select('event.*', 'users.name', 'users.contact', 'users.email')
+        $events = Eventmodel::join('users', 'book_table.user_id', '=', 'users.user_id')
+                        ->where('book_table.user_id', $id)
+                        ->select('book_table.*', 'users.name', 'users.contact', 'users.email')
                         ->get();
         //echo "<pre>"; print_r($events);die; echo "</pre>";
         return view('user.events',compact('events'));
@@ -116,29 +116,32 @@ class UserController extends Controller
     }
     public function Store_event(Request $request,$id){
        $date = $request['date'];
-       $e_type = $request['e_type'];
+       //$e_type = $request['e_type'];
        $status = 'Pending';
        $title = $request['name'];
+       $s_time = $request['s_time'];
+       $e_time = $request['e_time'];
        /*
        echo $date;
-       echo "<br>"; echo $e_type; echo "<br>"; echo $status; echo "<br>"; echo $id;
-       echo "<br>"; echo $title;die();*/
+       echo "<br>"; echo $s_time; echo "<br>"; echo $e_time;echo "<br>";echo $status; echo "<br>"; echo $id;
+       echo "<br>"; echo $title;die(); */
        $event = new Eventmodel;
        $event->user_id = $id;
-       $event->e_date = $date;
-       $event->e_type = $e_type;
+       $event->b_date = $date;
+       $event->starting_time = $s_time;
+       $event->ending_time = $e_time;
+       $event->booking_name = $title;
        $event->status = $status;
-       $event->title = $title;
        $event->save();
-       return redirect()->route('home')->with('requested','Event request  Sended.....');
+       return redirect()->route('home')->with('booking','booking request  Sended.....');
     }
     //for cancle the event request by the users
     public function CancelEvents($id){
-        $event = Eventmodel::where('e_id', $id)
-        ->update(['status' => 'Cancled by the user']);
+        $event = Eventmodel::where('b_id', $id)
+        ->update(['status' => 'Cancelled by the user']);
         if($event > 0)
             {
-                return redirect()->route('home')->with('Rejected','Event Status Updated'); 
+                return redirect()->route('home')->with('Rejected','Booking  Cancelled...'); 
             }
     }
 
@@ -245,6 +248,9 @@ class UserController extends Controller
         $price = $request->input('total_price');
         $cart = $request->session()->get('cart', []);
        // echo $p_type;die;
+       $user = User::where('user_id', $id)->first();
+      // echo "<pre>";
+      // print_r($user);die;
 
         if ($p_type == 'cash') {
             $order = new Order();
@@ -295,7 +301,7 @@ class UserController extends Controller
             // Clear the cart session data
             $request->session()->forget('cart');
             
-            return view('user.payment', compact('order_id', 'price'));
+            return view('user.payment', compact('order_id', 'price','user'));
 
         }
     

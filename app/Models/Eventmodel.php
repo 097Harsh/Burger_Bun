@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Eventmodel extends Model
 {
     use HasFactory;
-    protected $table = 'Event';
-    protected $fillable= ['e_id','user_id','e_date','e_type','status','title']; 
+    protected $table = 'book_table';
+    protected $fillable= ['b_id','user_id','b_date','starting_time','ending_time','status','booking_name']; 
 }

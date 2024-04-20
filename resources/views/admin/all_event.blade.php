@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>All Events</title>
+<title>All Table-Bookings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -65,26 +65,26 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<h4>All Events</h4>
                         @if(session('success'))
 						<div class="alert alert-success" role="alert">
-						Event Request Accepted
+						Booking Request Accepted
 						</div>
 						@elseif(session('Rejected'))
 						<div class="alert alert-danger" role="alert">
-						Event Request Rejected
+						Booking Request Rejected
 						</div>
 						@elseif(session('Completed'))
 						<div class="alert alert-success" role="alert">
-						Event Request Completed
+						Booking Request Completed
 						</div>
         				@endif
 						<table class="table table-hover"> 
                             <thead> 
                                 <tr> 
-                                    <th>Event ID</th> 
-                                    <th>Title</th> 
-                                    <th>User Name</th> 
-                                    <th>Contact</th> 
-                                    <th> Type</th> 
-                                    <th> Date</th> 
+                                    <th>Booking ID</th> 
+                                    <th>Booking Name</th> 
+                                    <th>Booking Date</th> 
+                                    <th>Booking Starting-time</th> 
+                                    <th> Booking Ending-time</th> 
+                                    <th> User Contact</th> 
                                     <th> Status</th> 
                                     <th>Actions</th>
                                     
@@ -93,19 +93,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <tbody> 
                                @foreach($events as $event)
                                 <tr> 
-                                    <th scope="row">{{$event->e_id}}</th> 
-                                    <td>{{$event->title}}</td> 
-                                    <td>{{$event->name}}</td> 
+                                    <th scope="row">{{$event->b_id}}</th> 
+                                    <td>{{$event->booking_name}}</td> 
+                                    <td>{{$event->b_date}}</td> 
+                                    <td>{{$event->starting_time}}</td> 
+                                    <td>{{$event->ending_time}}</td> 
                                     <td>{{$event->contact}}</td> 
-                                    <td>{{$event->e_type}}</td> 
-                                    <td>{{$event->e_date}}</td> 
                                     <td>{{$event->status}}</td> 
                                     <td colspan="2">
                                         @if($event->status == 'Pending')
-                                        <a href="{{ route('accept_event', ['e_id' => $event->e_id]) }}" class="btn btn-primary">Accept</a>
-                                        <a href="{{ route('reject_event', ['e_id' => $event->e_id]) }}" class="btn btn-danger">Reject</a>
+                                        <a href="{{ route('accept_event', ['e_id' => $event->b_id]) }}" class="btn btn-primary">Accept</a>
+                                        <a href="{{ route('reject_event', ['e_id' => $event->b_id]) }}" class="btn btn-danger">Reject</a>
                                         @elseif($event->status == 'Accepted')
-                                        <a href="{{ route('completed_event', ['e_id' => $event->e_id]) }}" class="btn btn-success">Completed</a>
+                                        <a href="{{ route('completed_event', ['e_id' => $event->b_id]) }}" class="btn btn-success">Completed</a>
                                         @endif
                                     </td>
                                 </tr> 

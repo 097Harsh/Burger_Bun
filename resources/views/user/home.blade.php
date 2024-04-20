@@ -7,8 +7,11 @@
             
         @elseif(session('contact')) 
             alert("{{ session('contact') }}");
-        
-        
+            @elseif(session('booking')) 
+            alert("{{ session('booking') }}");
+            @elseif(session('Rejected')) 
+            alert("{{ session('Rejected') }}");
+               
         
         @elseif(session('feedback'))
           alert("{{ session('feedback') }}");
@@ -55,7 +58,7 @@
                     cursus quis, leo.</p>
                 <div class="mt-md-5 mt-4">
                     <a class="btn btn-primary btn-style mr-2" href="{{route('menu')}}"> See Menu </a>
-                    <a class="btn btn-outline-primary btn-style" href="{{route('add_event')}}"> Book an event </a>
+                    <a class="btn btn-outline-primary btn-style" href="{{route('add_event')}}"> Book  table </a>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -215,9 +218,8 @@
         <div class="welcome-left text-center py-md-5 py-3">
             <h3>The Right Ingredients
                 for the Right Food. Eat Healthy, Delicious and Perfect Burgers From Our Hotel</h3>
-            <h3 class="mt-4">Call us to order: <a href="tel:+1 123 456 789">+1 123 456 789</a> </h3>
+            <h3 class="mt-4">Call us to order: <a href="tel:+1 123 456 789">+91 93132 34850</a> </h3>
             <a href="{{route('contact')}}" class="btn btn-style btn-primary mt-sm-5 mt-4 mr-2">Contact Us</a>
-            <a href="#book" class="btn btn-style btn-outline-primary mt-sm-5 mt-4">Book a table</a>
         </div>
     </div>
 </div>

@@ -269,9 +269,9 @@ class AdminAuthController extends Controller
     }
     
     public function ShowEvents(){
-        $events= Eventmodel::join('users', 'event.user_id', '=', 'users.user_id')
-        ->select('event.*', 'users.name', 'users.contact', 'users.email')
-        ->orderBy('event.e_id', 'asc')
+        $events= Eventmodel::join('users', 'book_table.user_id', '=', 'users.user_id')
+        ->select('book_table.*', 'users.name', 'users.contact', 'users.email')
+        ->orderBy('book_table.b_id', 'asc')
         ->paginate(5);
          //echo "<pre>"; print_r($events);die; echo "</pre>";
          return view('admin.all_event',compact('events'));
@@ -280,29 +280,29 @@ class AdminAuthController extends Controller
     //accepting evetns request
     public function AcceptEvent($id){
        
-       $event = Eventmodel::where('e_id', $id)
+       $event = Eventmodel::where('b_id', $id)
        ->update(['status' => 'Accepted']);
        if($event > 0)
         {
-            return redirect()->route('All_events')->with('success','Event Status Updated'); 
+            return redirect()->route('All_bookings')->with('success','Event Status Updated'); 
         }
     }
     //Rejecting evetns request
     public function RejectEvent($id){
-        $event = Eventmodel::where('e_id', $id)
+        $event = Eventmodel::where('b_id', $id)
         ->update(['status' => 'Rejected']);
         if($event > 0)
             {
-                return redirect()->route('All_events')->with('Rejected','Event Status Updated'); 
+                return redirect()->route('All_bookings')->with('Rejected','Event Status Updated'); 
             }
     }
     //Compliting evetns request
     public function CompletedEvent($id){
-        $event = Eventmodel::where('e_id', $id)
+        $event = Eventmodel::where('b_id', $id)
         ->update(['status' => 'Completed']);
         if($event > 0)
             {
-                return redirect()->route('All_events')->with('Completed','Event Status Updated'); 
+                return redirect()->route('All_bookings')->with('Completed','Event Status Updated'); 
             }
     }
 
