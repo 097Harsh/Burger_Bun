@@ -81,14 +81,13 @@ $userId = session('user_id');
                             $totalPrice += $cart['price'] * $cart['quantity'];
                         }
                     @endphp
-                    <div>Total Price: ₹<span id="total_price">{{ $totalPrice }}</span></div>
+                   <div>Total Price: ₹<span id="display_total_price">{{ $totalPrice }}</span></div>
                     <form method="post" action="{{route('select')}}">
-                    @csrf
-                        <input type="hidden" name="total_price" id="total_price" value="{{ $totalPrice }}">
-
-
+                        @csrf
+                        <input type="hidden" name="total_price" id="input_total_price" value="{{ $totalPrice }}">
                         <button class="btn btn-primary" type="submit" name="submit">Place Order</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -109,32 +108,35 @@ $userId = session('user_id');
 
 <script>
     function updateQuantity(index, action) {
-        let quantityElement = document.getElementById('quantity_' + index);
-        let quantity = parseInt(quantityElement.innerText);
+    let quantityElement = document.getElementById('quantity_' + index);
+    let quantity = parseInt(quantityElement.innerText);
 
-        if (action === 'increase') {
-            quantity++;
-        } else if (action === 'decrease') {
-            if (quantity > 1) {
-                quantity--;
-            }
-        }
+      if (action === 'increase') {
+          quantity++;
+      } else if (action === 'decrease') {
+          if (quantity > 1) {
+              quantity--;
+          }
+      }
 
-        quantityElement.innerText = quantity;
+      quantityElement.innerText = quantity;
 
-        // Recalculate total price
-        let totalPriceElement = document.getElementById('total_price');
-        let totalPrice = parseFloat(totalPriceElement.innerText);
-        let pricePerItem = parseFloat(document.getElementById('price_' + index).innerText.replace('₹', ''));
+      // Recalculate total price
+      let displayTotalPriceElement = document.getElementById('display_total_price');
+      let inputTotalPriceElement = document.getElementById('input_total_price');
+      let totalPrice = parseFloat(displayTotalPriceElement.innerText);
+      let pricePerItem = parseFloat(document.getElementById('price_' + index).innerText.replace('₹', ''));
 
-        if (action === 'increase') {
-            totalPrice += pricePerItem;
-        } else if (action === 'decrease') {
-            totalPrice -= pricePerItem;
-        }
+      if (action === 'increase') {
+          totalPrice += pricePerItem;
+      } else if (action === 'decrease') {
+          totalPrice -= pricePerItem;
+      }
 
-        totalPriceElement.innerText = totalPrice.toFixed(2);
-    }
+      displayTotalPriceElement.innerText = totalPrice.toFixed(2);
+      inputTotalPriceElement.value = totalPrice.toFixed(2);
+  }
+
 
     function removeProduct(index) {
         let row = document.getElementById('row_' + index); 
