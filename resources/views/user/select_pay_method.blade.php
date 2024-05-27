@@ -2,7 +2,7 @@
 $userId = session('user_id');
 //echo "User ID: $userId";
 //die();
-echo $totalprice;die;
+//echo $totalprice;die;
 @endphp
 
 <!doctype html>

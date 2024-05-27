@@ -156,7 +156,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
         		<div class="r3_counter_box">
                     <i class="pull-left fa fa-pie-chart dollar1 icon-rounded"></i>
                     <div class="stats">
-                      <h5><strong>{{$event}}</strong></h5>
+                      <h5><strong>1</strong></h5>
                       <span>Total Events</span>
                     </div>
                 </div>

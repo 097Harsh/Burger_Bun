@@ -80,11 +80,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <thead> 
                                 <tr> 
                                     <th>Booking ID</th> 
-                                    <th>Booking Name</th> 
+                                    <th>Booking Name</th>
+                                    <th>Booking Contact</th> 
                                     <th>Booking Date</th> 
                                     <th>Booking Starting-time</th> 
                                     <th> Booking Ending-time</th> 
-                                    <th> User Contact</th> 
                                     <th> Status</th> 
                                     <th>Actions</th>
                                     
@@ -94,11 +94,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                @foreach($events as $event)
                                 <tr> 
                                     <th scope="row">{{$event->b_id}}</th> 
-                                    <td>{{$event->booking_name}}</td> 
+                                    <td>{{$event->b_name}}</td>
+                                    <td>{{$event->b_contact}}</td> 
                                     <td>{{$event->b_date}}</td> 
-                                    <td>{{$event->starting_time}}</td> 
-                                    <td>{{$event->ending_time}}</td> 
-                                    <td>{{$event->contact}}</td> 
+                                    <td>{{$event->s_time}}</td> 
+                                    <td>{{$event->e_time}}</td> 
                                     <td>{{$event->status}}</td> 
                                     <td colspan="2">
                                         @if($event->status == 'Pending')

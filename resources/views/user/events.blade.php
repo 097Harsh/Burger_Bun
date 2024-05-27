@@ -45,12 +45,13 @@ $userId = session('user_id');
                     <div class="col-lg-12">
                         <h3>Your all events</h3><br>
                         <div class="table-responsive">
-                            <a href="{{route('add_event')}}"><button class="btn btn-success" style="float:right; text-color:white;">Schedule Event</button></a><br><br>
+                            <a href="{{route('add_event')}}"><button class="btn btn-success" style="float:right; text-color:white;">Book table</button></a><br><br>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>Booking ID</th>
                                         <th>Booking Name</th>
+                                        <th>Booking Contact</th>
                                         <th>Booking Date</th>
                                         <th>Booking Starting-time </th>
                                         <th>Booking Ending-time</th>
@@ -62,10 +63,11 @@ $userId = session('user_id');
                                     @foreach($events as $event)
                                     <tr>
                                         <td>{{$event->b_id}}</td>
-                                        <td>{{$event->booking_name}}</td>
+                                        <td>{{$event->b_name}}</td>
+                                        <td>{{$event->b_contact}}</td>
                                         <td>{{$event->b_date}}</td>
-                                        <td>{{$event->starting_time}}</td>
-                                        <td>{{$event->ending_time}}</td>
+                                        <td>{{$event->s_time}}</td>
+                                        <td>{{$event->e_time}}</td>
                                         <td> {{$event->status}} </td>
                                       @if($event->status == 'Pending')
                                         <td>

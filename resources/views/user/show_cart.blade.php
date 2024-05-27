@@ -18,7 +18,7 @@ $userId = session('user_id');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>All Events</title>
+    <title>Show-cart</title>
 
     <link href="//fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 
@@ -138,10 +138,30 @@ $userId = session('user_id');
   }
 
 
-    function removeProduct(index) {
-        let row = document.getElementById('row_' + index); 
-        row.parentNode.removeChild(row);
-    }
+  function removeProduct(index) {
+    // Get the quantity and price of the product
+    let quantity = parseInt(document.getElementById('quantity_' + index).innerText);
+    let pricePerItem = parseFloat(document.getElementById('price_' + index).innerText.replace('₹', ''));
+
+    // Remove the product row from the DOM
+    let row = document.getElementById('row_' + index); 
+    row.parentNode.removeChild(row);
+
+    // Recalculate total price
+    let displayTotalPriceElement = document.getElementById('display_total_price');
+    let inputTotalPriceElement = document.getElementById('input_total_price');
+    let totalPrice = parseFloat(displayTotalPriceElement.innerText);
+
+    // Calculate the new total price after removing the item
+    totalPrice -= pricePerItem * quantity;
+
+    displayTotalPriceElement.innerText = totalPrice.toFixed(2);
+    inputTotalPriceElement.value = totalPrice.toFixed(2);
+
+    // Optional: Display a message to indicate successful removal
+    alert('Product removed successfully.');
+}
+
 
     function placeOrder() {
         window.location.href = "{{route('select')}}";

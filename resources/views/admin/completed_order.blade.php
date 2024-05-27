@@ -64,7 +64,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<div class="bs-example widget-shadow" data-example-id="hoverable-table"> 
                             @if(session('cancel'))
                                 <div class="alert alert-danger" role="alert">
-                                    Order Canclled Successfully
+                                    Order Cancelled Successfully
                                 </div>
                             @elseif(session('success'))
                                 <div class="alert alert-success" role="alert">
@@ -82,28 +82,27 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <th>Payment Mode</th> 
                                     <th>Order Status</th> 
                                     <th>Price</th>
-                                    
-                                    
                                 </tr> 
                             </thead> 
                             <tbody> 
-                                @foreach($groupedOrders as $item)
+                                @foreach($groupedOrdersPaginator as $order)
                                 <tr>
-                                    <td>{{$item->order_id}}</td>
-                                    <td>{{$item->p_name}}</td>
-                                    <td>{{$item->user_name}}</td>
-                                    <td>{{$item->contact}}</td>
-                                    <td>{{$item->payment_status}}</td>
-                                    <td>{{$item->payment_method}}</td>
-                                    <td>{{$item->order_status}}</td>
-                                    <td>{{$item->total_price}}</td>
-                                  
+                                    <td>{{ $order->order_id }}</td>
+                                    <td>{{ $order->p_name }}</td>
+                                    <td>{{ $order->user_name }}</td>
+                                    <td>{{ $order->contact }}</td>
+                                    <td>{{ $order->payment_status }}</td>
+                                    <td>{{ $order->payment_method }}</td>
+                                    <td>{{ $order->order_status }}</td>
+                                    <td>{{ $order->total_price }}</td>
                                 </tr>
                                 @endforeach
                             </tbody> 
                         </table>
+						<div class="text-right"> <!-- Align pagination links to the right -->
+							{{ $groupedOrdersPaginator->links() }}
+						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>

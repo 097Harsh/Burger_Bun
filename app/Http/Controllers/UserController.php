@@ -121,17 +121,18 @@ class UserController extends Controller
        $title = $request['name'];
        $s_time = $request['s_time'];
        $e_time = $request['e_time'];
-       /*
-       echo $date;
-       echo "<br>"; echo $s_time; echo "<br>"; echo $e_time;echo "<br>";echo $status; echo "<br>"; echo $id;
+       $contact = $request['contact'];
+       /*echo $date;
+       echo "<br>"; echo $s_time; echo "<br>";echo $contact;echo "<br>"; echo $e_time;echo "<br>";echo $status; echo "<br>"; echo $id;
        echo "<br>"; echo $title;die(); */
        $event = new Eventmodel;
        $event->user_id = $id;
        $event->b_date = $date;
-       $event->starting_time = $s_time;
-       $event->ending_time = $e_time;
-       $event->booking_name = $title;
+       $event->s_time = $s_time;
+       $event->e_time = $e_time;
+       $event->b_name = $title;
        $event->status = $status;
+       $event->b_contact = $contact;
        $event->save();
        return redirect()->route('home')->with('booking','booking request  Sended.....');
     }

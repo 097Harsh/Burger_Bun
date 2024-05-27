@@ -36,7 +36,7 @@ $userId = session('user_id');
             <div class="top-map">
                 <div class="row map-content-9">
                     <div class="col-lg-4 cont-details">
-                      <br><br>
+                      <br><br><br><br>
                         <img src="user/assets/images/event.png" style="height: 300px; width: 410px; align:center;">
                     </div>
                     <div class="col-lg-8">
@@ -51,8 +51,8 @@ $userId = session('user_id');
                                     required="">
                                 <input type="text" name="w3lSubject" id="w3lSubject" placeholder="Subject">
                             </div>-->
-                            <input type="text" name="name" id="name" placeholder="Table Booking Name" required="">
-                           
+                            <input type="text" name="name" id="name" placeholder="Table Booking Name" required=""><br><br>  
+                            <input type="text" name="contact" id="contact" placeholder="Table Booking contact" required="">
                             <label for="date" style="float:left;">Pick date for table booking</label>
                             <input type="date" name="date" id="date" placeholder="Pick a date" required=""><br><br>
                             

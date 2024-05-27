@@ -39,6 +39,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!-- Metis Menu -->
 <script src="{{asset('admin/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('admin/js/custom.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="{{asset('admin/css/custom.css')}}" rel="stylesheet">
 <!--//Metis Menu -->
 
@@ -66,9 +67,15 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     Order Canclled Successfully
                                 </div>
                             @elseif(session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    Order Completed Successfully
-                                </div>
+							<script>
+							Swal.fire({
+									position: "top-end",
+									icon: "success",
+									title: "Order Request Accepted",
+									showConfirmButton: false,
+									timer: 1500
+									});
+						</script>
                              @endif
 						<table class="table table-hover"> 
                             <thead> 

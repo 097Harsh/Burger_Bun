@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2024 at 02:32 PM
+-- Generation Time: May 02, 2024 at 06:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,12 +51,13 @@ INSERT INTO `area` (`area_id`, `area_name`, `city_id`, `created_at`, `updated_at
 
 CREATE TABLE `book_table` (
   `b_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `b_date` date NOT NULL,
-  `starting_time` varchar(255) NOT NULL,
-  `ending_time` varchar(255) NOT NULL,
-  `booking_name` varchar(255) NOT NULL,
+  `b_name` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
+  `b_contact` bigint(20) NOT NULL,
+  `b_date` date NOT NULL,
+  `s_time` time NOT NULL,
+  `e_time` time NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -65,9 +66,8 @@ CREATE TABLE `book_table` (
 -- Dumping data for table `book_table`
 --
 
-INSERT INTO `book_table` (`b_id`, `user_id`, `b_date`, `starting_time`, `ending_time`, `booking_name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 5, '2024-04-20', '17:30', '18:30', 'harsh', 'Cancelled by the user', '2024-04-20 06:29:53', '2024-04-20 06:47:47'),
-(2, 2, '2024-04-27', '20:00', '21:00', 'Het Shah', 'Pending', '2024-04-20 06:32:38', '2024-04-20 07:00:31');
+INSERT INTO `book_table` (`b_id`, `b_name`, `status`, `b_contact`, `b_date`, `s_time`, `e_time`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Vishva Kansagra', 'Pending', 9745683210, '2024-05-03', '12:17:00', '13:16:00', 4, '2024-05-01 23:17:01', '2024-05-01 23:21:13');
 
 -- --------------------------------------------------------
 
@@ -213,10 +213,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (38, '2024_02_02_143646_create_feedback_table', 1),
 (39, '2024_02_06_112218_create_roles_table', 1),
 (40, '2024_02_08_110420_create_product_table', 2),
-(41, '2024_02_17_160728_add_gender_to_users_table', 3),
+(42, '2024_02_26_072524_create_event_table', 4),
 (43, '2024_03_13_152708_add_title_to_event_table', 5),
 (46, '2024_03_24_070934_create_order_table', 6),
-(47, '2024_02_26_072524_create_event_table', 7);
+(48, '2024_02_17_160728_add_gender_to_users_table', 8),
+(49, '2024_05_02_035540_create_table_booking', 9);
 
 -- --------------------------------------------------------
 
@@ -244,7 +245,13 @@ INSERT INTO `order` (`order_id`, `user_id`, `total_price`, `payment_method`, `pa
 (2, 2, 269.00, 'razorpay', 'Pending', 'Cancelled', '2024-03-29 01:57:21', '2024-03-29 01:57:21'),
 (3, 2, 269.00, 'razorpay', 'Completed', 'Completed', '2024-03-29 01:57:37', '2024-03-29 01:57:37'),
 (4, 2, 269.00, 'razorpay', 'Completed', 'Completed', '2024-03-29 01:58:46', '2024-03-29 01:58:46'),
-(5, 2, 185.00, 'razorpay', 'Completed', 'Completed', '2024-03-29 05:44:37', '2024-03-29 05:44:37');
+(5, 2, 185.00, 'razorpay', 'Completed', 'Completed', '2024-03-29 05:44:37', '2024-03-29 05:44:37'),
+(6, 7, 185.00, 'razorpay', 'Completed', 'Completed', '2024-04-08 21:49:40', '2024-04-08 21:49:40'),
+(7, 8, 85.00, 'razorpay', 'Completed', 'Completed', '2024-04-09 07:36:04', '2024-04-09 07:36:04'),
+(8, 8, 269.00, 'razorpay', 'Completed', 'Completed', '2024-04-09 10:47:21', '2024-04-09 10:47:21'),
+(9, 5, 85.00, 'razorpay', 'Completed', 'Completed', '2024-04-12 05:30:53', '2024-04-12 05:30:53'),
+(10, 5, 234.00, 'cash', 'Completed', 'Completed', '2024-04-12 05:33:35', '2024-04-12 05:33:35'),
+(11, 4, 35.00, 'razorpay', 'Completed', 'Completed', '2024-04-29 05:44:15', '2024-04-29 05:44:15');
 
 -- --------------------------------------------------------
 
@@ -275,7 +282,17 @@ INSERT INTO `order_items` (`item_id`, `order_id`, `p_id`, `quantity`, `price`, `
 (6, 4, 1, 1, 234.00, '2024-03-29 01:58:46', '2024-03-29 01:58:46'),
 (7, 4, 3, 1, 35.00, '2024-03-29 01:58:46', '2024-03-29 01:58:46'),
 (8, 5, 4, 1, 150.00, '2024-03-29 05:44:37', '2024-03-29 05:44:37'),
-(9, 5, 3, 1, 35.00, '2024-03-29 05:44:37', '2024-03-29 05:44:37');
+(9, 5, 3, 1, 35.00, '2024-03-29 05:44:37', '2024-03-29 05:44:37'),
+(10, 6, 4, 1, 150.00, '2024-04-08 21:49:40', '2024-04-08 21:49:40'),
+(11, 6, 5, 1, 35.00, '2024-04-08 21:49:40', '2024-04-08 21:49:40'),
+(12, 7, 2, 1, 50.00, '2024-04-09 07:36:04', '2024-04-09 07:36:04'),
+(13, 7, 3, 1, 35.00, '2024-04-09 07:36:04', '2024-04-09 07:36:04'),
+(14, 8, 1, 1, 234.00, '2024-04-09 10:47:21', '2024-04-09 10:47:21'),
+(15, 8, 3, 1, 35.00, '2024-04-09 10:47:21', '2024-04-09 10:47:21'),
+(16, 9, 2, 1, 50.00, '2024-04-12 05:30:53', '2024-04-12 05:30:53'),
+(17, 9, 5, 1, 35.00, '2024-04-12 05:30:53', '2024-04-12 05:30:53'),
+(18, 10, 1, 1, 234.00, '2024-04-12 05:33:35', '2024-04-12 05:33:35'),
+(19, 11, 5, 1, 35.00, '2024-04-29 05:44:15', '2024-04-29 05:44:15');
 
 -- --------------------------------------------------------
 
@@ -336,7 +353,7 @@ INSERT INTO `product` (`p_id`, `p_name`, `p_image`, `cat_id`, `user_id`, `is_del
 (2, 'Aloo-tiki Burger', 'burger.jpeg', 1, 1, 0, 'burger', 50.00, '2024-02-09 11:04:30', '2024-02-09 11:04:30'),
 (3, 'Sprite', 'sprite.jpeg', 2, 1, 0, 'Cold-Drinks', 35.00, '2024-02-10 10:51:21', '2024-02-10 10:51:21'),
 (4, 'Manchurain', 'manchurian.jpeg', 3, 1, 0, 'Manchurian', 150.00, '2024-03-23 22:41:14', '2024-03-23 22:41:14'),
-(5, 'Pepsi', 'istockphoto-487787092-612x612.jpg', 2, 1, 0, 'Pepsi soft drink', 35.00, '2024-03-26 07:36:32', '2024-03-26 07:36:32'),
+(5, 'Pepsi', 'th.jpeg', 2, 1, 0, 'Pepsi soft drink', 35.00, '2024-03-26 07:36:32', '2024-03-26 07:36:32'),
 (6, 'Veg parcel', 'veg_parcel.jpg', 1, 1, 0, 'made with paneer, vegetables, flour', 60.00, '2024-03-28 01:47:45', '2024-03-28 01:47:45');
 
 -- --------------------------------------------------------
@@ -407,12 +424,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `Contact`, `address`, `image`, `area_id`, `created_at`, `updated_at`, `gender`) VALUES
-(1, 'Admin', 'admin@gmail.com', '2024-02-08 10:55:55', '$2y$12$NfsieCPZHP/qIJVj1wOOMOmnfV2JK2Rho.mKmLawzy6.bnA5TACl2', 1, '9712658293', 'Bapunagar', '00.jpg', 1, '2024-02-08 10:55:55', '2024-02-08 10:55:55', 'Male'),
-(2, 'Harsh Shah', 'harshshah@gmail.com', '2024-02-08 05:29:55', '$2y$12$bD9SUW63EXIxCBVFjk30wefzh1iuPmcgmehvARShtqDrXlem1Wv9O', 2, '9712658293', 'bapunagar', '0000.jpg', 1, '2024-02-08 05:29:55', '2024-02-08 05:29:55', 'Male'),
-(3, 'Vishva Kansagra', 'vishvakansagra@gmail.com', '2024-02-11 23:30:51', '$2y$12$9uH1S2619WTU5Zhe5Aj5UOMeYyGBUh.8WY2dL82IVHyvaKc9KHh8K', 2, '7496853210', 'hirawadi', 'IMG-20230923-WA0005.jpg', 1, '2024-02-11 23:30:52', '2024-02-11 23:30:52', 'Female'),
-(4, 'Diya lagdhir', 'diya@gmail.com', '2024-02-17 10:56:39', '$2y$12$YXb7VPo7K.kddrYLLueZheBWUwtnNr96/bk7SorxEukDEC8/pYI1S', 2, '8574120369', 'Narol', 'vintagecar.jpg', 2, '2024-02-17 10:56:40', '2024-02-17 10:56:40', 'Female'),
-(5, 'Harsh Prajapati', 'hvprajapati@gmail.com', '2024-02-26 01:17:12', '$2y$12$98k5KfduW8kc29AkGGaWlOEI6VCgvxAhjFmbrDxn9x2kt.JfisLyS', 2, '8574120369', 'Naroda', 'urus.jpg', 2, '2024-02-26 01:17:13', '2024-02-26 01:17:13', 'Male'),
-(6, 'Krupali Savaliya', 'khebdi@gmail.com', '2024-03-26 07:32:32', '$2y$12$D7Fyb/qd2.aCPy/q9dB63uxTF5WArOoAO4BNbAqJU9rfncJFpqUee', 2, '8745963210', 'Nikol', 'RBIMS.png', 2, '2024-03-26 07:32:33', '2024-03-26 07:32:33', 'Female');
+(1, 'Admin', 'admin@gmail.com', '2024-02-08 10:55:55', '$2y$12$NfsieCPZHP/qIJVj1wOOMOmnfV2JK2Rho.mKmLawzy6.bnA5TACl2', 1, '9712658293', 'Bapunagar', '00.jpg', 1, '2024-02-08 10:55:55', '2024-02-08 10:55:55', NULL),
+(2, 'Harsh Shah', 'harshshah@gmail.com', '2024-02-08 05:29:55', '$2y$12$bD9SUW63EXIxCBVFjk30wefzh1iuPmcgmehvARShtqDrXlem1Wv9O', 2, '9712658293', 'bapunagar', '0000.jpg', 1, '2024-02-08 05:29:55', '2024-02-08 05:29:55', NULL),
+(3, 'Vishva Kansagra', 'vishvakansagra@gmail.com', '2024-02-11 23:30:51', '$2y$12$9uH1S2619WTU5Zhe5Aj5UOMeYyGBUh.8WY2dL82IVHyvaKc9KHh8K', 2, '7496853210', 'hirawadi', 'IMG-20230923-WA0005.jpg', 1, '2024-02-11 23:30:52', '2024-02-11 23:30:52', NULL),
+(4, 'Diya lagdhir', 'diya@gmail.com', '2024-02-17 10:56:39', '$2y$12$YXb7VPo7K.kddrYLLueZheBWUwtnNr96/bk7SorxEukDEC8/pYI1S', 2, '8574120369', 'Narol', 'vintagecar.jpg', 2, '2024-02-17 10:56:40', '2024-02-17 10:56:40', NULL),
+(5, 'Harsh Prajapati', 'hvprajapati@gmail.com', '2024-02-26 01:17:12', '$2y$12$RvcdkSf7/fV/55WepwmKT.8z5UpgRAD0CMVm.g5oMWKXqBwv7mZPC', 2, '8574120369', 'Naroda', 'th.jpeg', 2, '2024-02-26 01:17:13', '2024-02-26 01:17:13', NULL),
+(6, 'Krupali Savaliya', 'khebdi@gmail.com', '2024-03-26 07:32:32', '$2y$12$D7Fyb/qd2.aCPy/q9dB63uxTF5WArOoAO4BNbAqJU9rfncJFpqUee', 2, '8745963210', 'Nikol', 'RBIMS.png', 2, '2024-03-26 07:32:33', '2024-03-26 07:32:33', NULL),
+(7, 'Raj vora', 'raj@gmail.com', '2024-04-08 20:00:20', '$2y$12$gsdpTHof.jL8h3V18CqSteyt5V6gtjpf2Gi2y.5nu.kwfTQVLIxtS', 2, '8574120369', 'aa', '20230729_122758.jpg', 1, '2024-04-08 20:00:21', '2024-04-08 20:00:21', NULL),
+(8, 'Smit Panchal', 'smit@gmail.com', '2024-04-09 07:35:24', '$2y$12$nDfdv0FPyujmTNJIjhAD/uVYQ6pmSbSKippjI7G6OWWwD09cyTppC', 2, '9874563201', 'Odhav', 'th.jpeg', 1, '2024-04-09 07:35:25', '2024-04-09 07:35:25', NULL);
 
 --
 -- Indexes for dumped tables
@@ -543,7 +562,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `book_table`
 --
 ALTER TABLE `book_table`
-  MODIFY `b_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `b_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -579,19 +598,19 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `item_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -621,7 +640,7 @@ ALTER TABLE `state`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -637,7 +656,7 @@ ALTER TABLE `area`
 -- Constraints for table `book_table`
 --
 ALTER TABLE `book_table`
-  ADD CONSTRAINT `book_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL;
+  ADD CONSTRAINT `book_table_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `city`

@@ -15,6 +15,8 @@ use Hash;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
@@ -62,9 +64,9 @@ class AdminAuthController extends Controller
        //echo "welcome dashboard";die;
        //to calcilate the user from database and send data to dashboard page
        $users = User::where('role_id','!=','1')->count();
-       $event = Eventmodel::where('status', '!=', 'Rejected')
+       /*$event = Eventmodel::where('status', '!=', 'Rejected')
                     ->where('status', '!=', 'Cancled by the user')
-                    ->count();
+                    ->count(); */
 
         //to calculate total orders into this we cannot not calculate Cancelled orders
         $orderCount = Order::whereNotIn('order_status', ['Cancelled', 'Cancelled by the user'])->count();
@@ -84,7 +86,7 @@ class AdminAuthController extends Controller
         
         //echo "<pre>";print_r($data);die;echo "</pre>";
        }
-       return view('admin.dashboard',compact('data','users','event','orderCount','pendingorder','totalCompletedPrice'));
+       return view('admin.dashboard',compact('data','users','orderCount','pendingorder','totalCompletedPrice'));
     }
     //Add Category
     public function add_cat(){
@@ -259,7 +261,6 @@ class AdminAuthController extends Controller
             //echo "hi";die;
             DB::table('product')->where('p_id', $id)->update([
                 'p_name' => $name,
-                'p_image' => $image,
                 'cat_id' => $cat,
                 'description' => $msg,
                 'price' => $price
@@ -367,45 +368,62 @@ class AdminAuthController extends Controller
     //show Complete Order
     public function ShowCompleteOrder()
     {
+        // Fetch the paginated orders in ascending order by order_id
         $orders = DB::table('order')
-        ->select('order.*', 'order_items.*', 'product.p_name', 'users.name as user_name', 'users.contact')
-        ->join('order_items', 'order.order_id', '=', 'order_items.order_id')
-        ->join('product', 'order_items.p_id', '=', 'product.p_id')
-        ->join('users', 'order.user_id', '=', 'users.user_id')
-        ->where('order.order_status', '=', 'Completed')
-        ->get();
+            ->select('order.*', 'order_items.*', 'product.p_name', 'users.name as user_name', 'users.contact')
+            ->join('order_items', 'order.order_id', '=', 'order_items.order_id')
+            ->join('product', 'order_items.p_id', '=', 'product.p_id')
+            ->join('users', 'order.user_id', '=', 'users.user_id')
+            ->where('order.order_status', '=', 'Completed')
+            ->orderBy('order.order_id', 'asc')
+            ->paginate(10); // Assuming you want 8 items per page
 
-     // Group the results by order ID
-        $groupedOrders = $orders->groupBy('order_id')->map(function ($group) {
-        $mergedOrder = (object)[
-            'order_id' => $group[0]->order_id,
-            'user_name' => $group[0]->user_name,
-            'contact' => $group[0]->contact, // Include contact
-            'p_name' => [],
-            'total_price' => 0,
-            'payment_method' => null,
-            'payment_status' => null,
-            'order_status' => null
-        ];
+        // Get the items from the paginator
+        $items = $orders->items();
 
-        foreach ($group as $item) {
-            $mergedOrder->p_name[] = $item->p_name;
-            $mergedOrder->total_price = $item->total_price;
-            $mergedOrder->payment_method = $item->payment_method;
-            $mergedOrder->payment_status = $item->payment_status;
-            $mergedOrder->order_status = $item->order_status;
-        }
+        // Group the items by order_id
+        $groupedItems = collect($items)->groupBy('order_id')->map(function ($group) {
+            $mergedOrder = (object)[
+                'order_id' => $group[0]->order_id,
+                'user_name' => $group[0]->user_name,
+                'contact' => $group[0]->contact,
+                'p_name' => [],
+                'total_price' => 0,
+                'payment_method' => null,
+                'payment_status' => null,
+                'order_status' => null
+            ];
 
-        return $mergedOrder;
+            foreach ($group as $item) {
+                $mergedOrder->p_name[] = $item->p_name;
+                $mergedOrder->total_price = $item->total_price;
+                $mergedOrder->payment_method = $item->payment_method;
+                $mergedOrder->payment_status = $item->payment_status;
+                $mergedOrder->order_status = $item->order_status;
+            }
+
+            return $mergedOrder;
         });
 
-            // Remove leading comma from p_names field
-            $groupedOrders->transform(function ($item) {
-                $item->p_name = implode(', ', $item->p_name);
-                return $item;
-            });
-        //echo "<pre>"; print_r($groupedOrders);die;
-            return view('admin.completed_order',compact('groupedOrders'));
+        // Remove leading comma from p_names field
+        $groupedOrders = $groupedItems->map(function ($item) {
+            $item->p_name = implode(', ', $item->p_name);
+            return $item;
+        });
 
+        // Create a new LengthAwarePaginator instance
+        $groupedOrdersPaginator = new \Illuminate\Pagination\LengthAwarePaginator(
+            $groupedOrders,
+            $orders->total(),
+            $orders->perPage(),
+            $orders->currentPage(),
+            ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
+        );
+
+        return view('admin.completed_order', compact('groupedOrdersPaginator'));
     }
+
+
+
+
 }

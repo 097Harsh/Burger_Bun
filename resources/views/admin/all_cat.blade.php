@@ -39,6 +39,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!-- Metis Menu -->
 <script src="{{asset('admin/js/metisMenu.min.js')}}"></script>
 <script src="{{('admin/js/custom.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link href="{{('admin/css/custom.css')}}" rel="stylesheet">
 <!--//Metis Menu -->
 
@@ -64,17 +65,29 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					<div class="bs-example widget-shadow" data-example-id="hoverable-table"> 
 						<h4>All categories</h4>
 						@if(session('success'))
-						<div class="alert alert-success" role="alert">
-							Category Added
-						</div>
+						<script>
+							Swal.fire({
+									position: "top-end",
+									icon: "success",
+									title: "Category Added",
+									showConfirmButton: false,
+									timer: 1500
+									});
+						</script>
 						@elseif(session('cat_success'))
 						<div class="alert alert-danger" role="alert">
 							Category Deleted
 						</div>
 						@elseif(session('update'))
-						<div class="alert alert-success" role="alert">
-							Category Updated
-						</div>
+						<script>
+							Swal.fire({
+									position: "top-end",
+									icon: "success",
+									title: "Category updated",
+									showConfirmButton: false,
+									timer: 1500
+									});
+						</script>
         				@endif
                         <a href="{{route('add_category')}}"><button class="btn btn-default" style="float:right;">Add Category</button></a>
 						<table class="table table-hover"> 
